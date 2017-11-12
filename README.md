@@ -262,7 +262,7 @@ Windows Registry Editor Version 5.00
 "SshProt"=dword:00000003
 "SSH2DES"=dword:00000000
 "PublicKeyFile"=""
-"RemoteCommand"=""
+"RemoteCommand"="tmux attach -t GigiX || tmux new -s GigiX"
 "RFCEnviron"=dword:00000000
 "PassiveTelnet"=dword:00000000
 "BackspaceIsDelete"=dword:00000001
@@ -291,7 +291,7 @@ Windows Registry Editor Version 5.00
 "LocalEdit"=dword:00000002
 "Answerback"="PuTTY"
 "AlwaysOnTop"=dword:00000000
-"FullScreenOnAltEnter"=dword:00000000
+"FullScreenOnAltEnter"=dword:00000001
 "HideMousePtr"=dword:00000000
 "SunkenEdge"=dword:00000000
 "WindowBorder"=dword:00000001
