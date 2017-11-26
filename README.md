@@ -67,8 +67,8 @@ set-window-option -g xterm-keys on
 #set -g default-terminal "screen-256color"
 set -g default-terminal "tmux-256color"
 
-set -g terminal-overrides "putty*:kLFT5=\eOD:kRIT5=\eOC:kUP5=\eOA:kDN5=\eOB:smkx@:rmkx@"
-#set -g terminal-overrides "putty*:kLFT@:kRIT@:kLFT5=\e[D:kRIT5=\e[C:kUP5=\e[A:kDN5=\e[B"
+set -g terminal-overrides "putty*:kLFT5=\eOD:kRIT5=\eOC:kUP5=\eOA:kDN5=\eOB:smkx@:rmkx@,*-256color:Tc"
+#set -g terminal-overrides "putty*:kLFT@:kRIT@:kLFT5=\e[D:kRIT5=\e[C:kUP5=\e[A:kDN5=\e[B,*-256color:Tc"
 
 #Agrandir/retrecir le pane
 bind-key -n C-Space resize-pane -Z
