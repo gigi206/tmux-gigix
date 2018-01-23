@@ -39,12 +39,22 @@ case $TERM in
         bindkey '^[OB' history-search-forward
    ;;
 
-    xterm-256color|screen-256color)
-        #Fléches gauches droites
-        bindkey '^[[1;2D' backward-char
-        bindkey '^[[1;2C' forward-char
-
+    xterm-256color | screen-256color | tmux-256color)
         #Ctrl+fléches gauche/droite => mot précèdent/suivant
         bindkey '^[[1;5D' backward-word
         bindkey '^[[1;5C' forward-word
+
+        #Ctrl+fléches haut/bas => recherche dans l'historique ce qui commence par ce qui est entré
+        bindkey '^[[1;5A' history-search-backward
+        bindkey '^[[1;5B' history-search-forward
+
+        #Numpad + -  * / Enter
+        if `xhost &>/dev/null`; then
+            bindkey -s "^[Ok" "+"
+            bindkey -s "^[Om" "-"
+            bindkey -s "^[Oj" "*"
+            bindkey -s "^[Oo" "/"
+            bindkey -s "^[OM" "^M"
+        fi
+    ;;
 esac
