@@ -58,3 +58,33 @@ case $TERM in
         fi
     ;;
 esac
+
+#Plugin zsh-syntax-highlighting => https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/docs/highlighters.md
+#ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
+
+#ZSH colors => http://zsh.sourceforge.net/Doc/Release/Zsh-Line-Editor.html#Character-Highlighting
+ZSH_HIGHLIGHT_STYLES[globbing]='fg=208,bold'
+ZSH_HIGHLIGHT_STYLES[path]='fg=cyan'
+ZSH_HIGHLIGHT_STYLES[path_pathseparator]='fg=cyan,bold'
+ZSH_HIGHLIGHT_STYLES[redirection]='fg=200,bold'
+ZSH_HIGHLIGHT_STYLES[assign]='fg=62'
+ZSH_HIGHLIGHT_STYLES[history-expansion]='fg=97'
+
+#Alias
+alias lsblk='lsblk --output NAME,KNAME,FSTYPE,SIZE,TYPE,MOUNTPOINT,REV,VENDOR,MAJ:MIN,LABEL,PARTLABEL,RO,RM,STATE,RQ-SIZE,MIN-IO'
+alias history='fc -li -100000 | grep $(date -I)'
+alias h=history
+
+#Less
+export LESS_TERMCAP_mb=$'\E[1;31m'
+export LESS_TERMCAP_md=$'\E[1;36m'
+export LESS_TERMCAP_me=$'\E[0m'
+#export LESS_TERMCAP_so=$'\e[01;33m'
+export LESS_TERMCAP_se=$'\E[0m'
+export LESS_TERMCAP_us=$'\E[1;32m'
+export LESS_TERMCAP_ue=$'\E[0m'
+export GROFF_NO_SGR=1
+
+#Force la tab à 4 espaces
+tabs -4
