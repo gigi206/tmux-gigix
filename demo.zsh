@@ -4,6 +4,9 @@ unsetopt extendedglob
 #Problème avec les "-" dans les noms de variables
 setopt norecexact
 
+#Pas de partage d'historique entre les sessions
+setopt nosharehistory
+
 #Ctrl+w => supprime le dernier mot
 autoload -U select-word-style
 select-word-style bash
