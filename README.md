@@ -29,10 +29,19 @@ Requirements
 
 Docker for testing
 ------------------
-If you have Docker installed on your system :
+If you have Docker installed on your system you can build or installed the Docker image.
+
+### Build yourself the Docker image
 ```sh
 docker build -t tmux-gigix http://raw.githubusercontent.com/gigi206/docker/master/Dockerfile/vim-gigix_tmux-gigix/Dockerfile
 docker run --rm -it --name tmux-gigix -e TERM=xterm-256color tmux-gigix tmux -2uc vim
+```
+
+
+### Use the prebuild Docker image
+```sh
+docker pull gigi206/vim-gigix
+docker run --rm -it --name tmux-gigix -e TERM=xterm-256color gigi206/vim-gigix tmux -2uc vim
 ```
 
 
@@ -42,14 +51,14 @@ Put [tmux.conf](tmux.conf) in **~/.tmux.conf** or **/etc/tmux.conf**.
 
 
 Putty support
-=============
+-------------
 If you use tmux with **Putty**, you should install this [Putty reg file](https://github.com/gigi206/vim-gigix/blob/master/Putty/putty.reg) for compatibility colors.
 
 Use [Putty 0.71](https://www.chiark.greenend.org.uk/~sgtatham/putty/releases/0.70.html) minimal release to have true color compatibility. At the time I wrote these lines, Putty 0.71 was not been released and you must download the [snapshot release](https://www.chiark.greenend.org.uk/~sgtatham/putty/snapshot.html) that contain the [true (24-bit) color patch](https://www.chiark.greenend.org.uk/~sgtatham/putty/wishlist/true-colour.html).
 
 
 ZSH
-===
+---
 If you have installed [oh-my-zsh](http://ohmyz.sh/) .
 
 
@@ -75,7 +84,7 @@ Put this script in **$ZSH_CUSTOM** directory.
 
 
 Key mapping
-===========
+-----------
 Default prefix haven't changed `C-b`
 I put a second prefix `C-x`
 
