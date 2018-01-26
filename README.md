@@ -27,6 +27,15 @@ Requirements
 * install xclip (optionnal)
 
 
+Docker for testing
+------------------
+If you have Docker installed on your system :
+```sh
+docker build -t tmux-gigix http://raw.githubusercontent.com/gigi206/docker/master/Dockerfile/vim-gigix_tmux-gigix/Dockerfile
+docker run --rm -it --name tmux-gigix -e TERM=xterm-256color tmux-gigix tmux -2uc vim
+```
+
+
 tmux.conf
 ---------
 Put [tmux.conf](tmux.conf) in **~/.tmux.conf** or **/etc/tmux.conf**.
