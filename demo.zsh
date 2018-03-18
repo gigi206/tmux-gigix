@@ -67,6 +67,7 @@ esac
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
 
 #ZSH colors => http://zsh.sourceforge.net/Doc/Release/Zsh-Line-Editor.html#Character-Highlighting
+typeset -gA ZSH_HIGHLIGHT_STYLES
 ZSH_HIGHLIGHT_STYLES[globbing]='fg=208,bold'
 ZSH_HIGHLIGHT_STYLES[path]='fg=cyan'
 ZSH_HIGHLIGHT_STYLES[path_pathseparator]='fg=cyan,bold'
