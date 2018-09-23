@@ -8,12 +8,20 @@ setopt norecexact
 setopt nosharehistory
 
 #Ctrl+w => supprime le dernier mot
-autoload -U select-word-style
-select-word-style bash
-bindkey '^W' backward-kill-word
-autoload -U backward-kill-word-match
-zle -N backward-kill-word backward-kill-word-match
-zstyle ':zle:backward-kill-word' word-style whitespace-subword
+#autoload -U select-word-style
+#select-word-style bash
+#bindkey '^W' backward-kill-word
+#autoload -U backward-kill-word-match
+#zle -N backward-kill-word backward-kill-word-match
+#zstyle ':zle:backward-kill-word' word-style whitespace-subword
+
+custom-backward-delete-word() {                                                                                                                                             
+    local WORDCHARS='*?_-+.[]~=&,;:§!#$£%^¨(){}<>/\@`°|"'"'"
+    zle backward-delete-word
+}
+
+zle -N custom-backward-delete-word
+bindkey '^W' custom-backward-delete-word
 
 #Gestion tab au milieu d'une ligne (grace à _prefix)
 zstyle ':completion:*' completer _complete _prefix:-complete _prefix:-approximate
