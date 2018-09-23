@@ -7,6 +7,8 @@ setopt norecexact
 #Pas de partage d'historique entre les sessions
 setopt nosharehistory
 
+WORDCHARS='*?_-+.[]~=&,;:§!#$£%^¨(){}<>/\@`°|"'"'"
+
 #Ctrl+w => supprime le dernier mot
 #autoload -U select-word-style
 #select-word-style bash
@@ -15,13 +17,20 @@ setopt nosharehistory
 #zle -N backward-kill-word backward-kill-word-match
 #zstyle ':zle:backward-kill-word' word-style whitespace-subword
 
-custom-backward-delete-word() {                                                                                                                                             
-    local WORDCHARS='*?_-+.[]~=&,;:§!#$£%^¨(){}<>/\@`°|"'"'"
-    zle backward-delete-word
-}
+#custom-backward-delete-word() {                                                                                                                                             
+#    local WORDCHARS='*?_-+.[]~=&,;:§!#$£%^¨(){}<>/\@`°|"'"'"
+#    zle backward-delete-word
+#}
+#zle -N custom-backward-delete-word
+#bindkey '^W' custom-backward-delete-word
 
-zle -N custom-backward-delete-word
-bindkey '^W' custom-backward-delete-word
+#Alt+Backspace => surpprime jusqu'au prochain espace ou slash
+backward-kill-dir () {
+    local WORDCHARS=${WORDCHARS/\//}
+    zle backward-kill-word
+}
+zle -N backward-kill-dir
+bindkey "^[${terminfo[kbs]}" backward-kill-dir
 
 #Gestion tab au milieu d'une ligne (grace à _prefix)
 zstyle ':completion:*' completer _complete _prefix:-complete _prefix:-approximate
@@ -39,35 +48,25 @@ bindkey '^U' backward-kill-line
 #Alt+u => supprime la ligne entière
 bindkey "^[u" kill-whole-line
 
-case $TERM in
-    putty-256color)
-        #Ctrl+fléches gauche/droite => mot précèdent/suivant
-        bindkey '^[OD' backward-word
-        bindkey '^[OC' forward-word
+#Ctrl+fléches gauche/droite => mot précèdent/suivant
+bindkey "${terminfo[kLFT5]}" backward-word
+bindkey "${terminfo[kRIT5]}" forward-word
 
-        #Ctrl+fléches haut/bas => recherche dans l'historique ce qui commence par ce qui est entré
-        bindkey '^[OA' history-search-backward
-        bindkey '^[OB' history-search-forward
-   ;;
+#Ctrl+fléches haut/bas => recherche dans l'historique ce qui commence par ce qui est entré
+bindkey "${terminfo[kUP5]}" history-search-backward
+bindkey "${terminfo[kDN5]}" history-search-forward
 
+case $TERM in                                                                                                                                                               
     xterm-256color | screen-256color | tmux-256color)
-        #Ctrl+fléches gauche/droite => mot précèdent/suivant
-        bindkey '^[[1;5D' backward-word
-        bindkey '^[[1;5C' forward-word
-
-        #Ctrl+fléches haut/bas => recherche dans l'historique ce qui commence par ce qui est entré
-        bindkey '^[[1;5A' history-search-backward
-        bindkey '^[[1;5B' history-search-forward
-
         #Numpad + -  * / Enter
         if `xhost &>/dev/null`; then
-            bindkey -s "^[Ok" "+"
-            bindkey -s "^[Om" "-"
-            bindkey -s "^[Oj" "*"
-            bindkey -s "^[Oo" "/"
+            bindkey -s "^[Ok" "+" 
+            bindkey -s "^[Om" "-" 
+            bindkey -s "^[Oj" "*" 
+            bindkey -s "^[Oo" "/" 
             bindkey -s "^[OM" "^M"
         fi
-    ;;
+    ;;  
 esac
 
 #Plugin zsh-syntax-highlighting => https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/docs/highlighters.md
