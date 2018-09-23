@@ -84,8 +84,8 @@ ZSH_HIGHLIGHT_STYLES[history-expansion]='fg=97'
 
 #Alias
 alias lsblk='lsblk --output NAME,KNAME,FSTYPE,SIZE,TYPE,MOUNTPOINT,REV,VENDOR,MAJ:MIN,LABEL,PARTLABEL,RO,RM,STATE,RQ-SIZE,MIN-IO'
-alias history='fc -li -100000 | grep $(date -I)'
-alias h=history
+alias history='fc -li -100000'
+alias h='fc -li -100000 | grep $(date -I)'
 
 #Less
 export LESS_TERMCAP_mb=$'\E[1;31m'
