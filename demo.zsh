@@ -56,19 +56,6 @@ bindkey "${terminfo[kRIT5]}" forward-word
 bindkey "${terminfo[kUP5]}" history-search-backward
 bindkey "${terminfo[kDN5]}" history-search-forward
 
-case $TERM in                                                                                                                                                               
-    xterm-256color | screen-256color | tmux-256color)
-        #Numpad + -  * / Enter
-        if `xhost &>/dev/null`; then
-            bindkey -s "^[Ok" "+" 
-            bindkey -s "^[Om" "-" 
-            bindkey -s "^[Oj" "*" 
-            bindkey -s "^[Oo" "/" 
-            bindkey -s "^[OM" "^M"
-        fi
-    ;;  
-esac
-
 #Plugin zsh-syntax-highlighting => https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/docs/highlighters.md
 #ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
