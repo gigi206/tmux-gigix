@@ -17,7 +17,7 @@ WORDCHARS='*?_-+.[]~=&,;:§!#$£%^¨(){}<>/\@`°|"'"'"
 #zle -N backward-kill-word backward-kill-word-match
 #zstyle ':zle:backward-kill-word' word-style whitespace-subword
 
-#custom-backward-delete-word() {                                                                                                                                             
+#custom-backward-delete-word() {
 #    local WORDCHARS='*?_-+.[]~=&,;:§!#$£%^¨(){}<>/\@`°|"'"'"
 #    zle backward-delete-word
 #}
