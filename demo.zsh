@@ -52,14 +52,36 @@ bindkey '^U' backward-kill-line
 #Alt+u => supprime la ligne entière
 bindkey "^[u" kill-whole-line
 
-#Ctrl+fléches gauche/droite => mot précèdent/suivant
-bindkey "${terminfo[kLFT5]}" backward-word
-bindkey "${terminfo[kRIT5]}" forward-word
+case $TERM in
+    putty-256color)
+        #Ctrl+fléches gauche/droite => mot précèdent/suivant
+        bindkey '^[OD' backward-word
+        bindkey '^[OC' forward-word
 
-#Ctrl+fléches haut/bas => recherche dans l'historique ce qui commence par ce qui est entré
-bindkey "${terminfo[kUP5]}" history-search-backward
-bindkey "${terminfo[kDN5]}" history-search-forward
+        #Ctrl+fléches haut/bas => recherche dans l'historique ce qui commence par ce qui est entré
+        bindkey '^[OA' history-search-backward
+        bindkey '^[OB' history-search-forward
+   ;;
 
+    xterm-256color | screen-256color | tmux-256color)
+        #Ctrl+fléches gauche/droite => mot précèdent/suivant
+        bindkey '^[[1;5D' backward-word
+        bindkey '^[[1;5C' forward-word
+
+        #Ctrl+fléches haut/bas => recherche dans l'historique ce qui commence par ce qui est entré
+        bindkey '^[[1;5A' history-search-backward
+        bindkey '^[[1;5B' history-search-forward
+
+        #Numpad + -  * / Enter
+        if `xhost &>/dev/null`; then
+            bindkey -s "^[Ok" "+"
+            bindkey -s "^[Om" "-"
+            bindkey -s "^[Oj" "*"
+            bindkey -s "^[Oo" "/"
+            bindkey -s "^[OM" "^M"
+        fi
+    ;;
+esac
 #Plugin zsh-syntax-highlighting => https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/docs/highlighters.md
 #ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
