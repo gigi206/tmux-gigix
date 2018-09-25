@@ -7,6 +7,10 @@ setopt norecexact
 #Pas de partage d'historique entre les sessions
 setopt nosharehistory
 
+#Compatibilité bash
+autoload -U bashcompinit && bashcompinit
+
+#Définition mot zsh
 WORDCHARS='*?_-+.[]~=&,;:§!#$£%^¨(){}<>/\@`°|"'"'"
 
 #Ctrl+w => supprime le dernier mot
