@@ -11,30 +11,32 @@ setopt nosharehistory
 autoload -U bashcompinit && bashcompinit
 
 #Définition mot zsh
-WORDCHARS='*?_-+.[]~=&,;:§!#$£%^¨(){}<>/\@`°|"'"'"
+WORDCHARS='*?_-+.[]~=&,;:§!#$£%^¨(){}<>\@`°|"'"'"
 
-#Ctrl+w => supprime le dernier mot
-#autoload -U select-word-style
-#select-word-style bash
-#bindkey '^W' backward-kill-word
-#autoload -U backward-kill-word-match
-#zle -N backward-kill-word backward-kill-word-match
-#zstyle ':zle:backward-kill-word' word-style whitespace-subword
-
-#custom-backward-delete-word() {
-#    local WORDCHARS='*?_-+.[]~=&,;:§!#$£%^¨(){}<>/\@`°|"'"'"
-#    zle backward-delete-word
-#}
-#zle -N custom-backward-delete-word
-#bindkey '^W' custom-backward-delete-word
-
-#Alt+Backspace => surpprime jusqu'au prochain espace ou slash
-backward-kill-dir () {
-    local WORDCHARS=${WORDCHARS/\//}
+#Fonctions
+custom-backward-kill-word () {
+    local WORDCHARS="${WORDCHARS}/"
     zle backward-kill-word
 }
-zle -N backward-kill-dir
-bindkey "^[${terminfo[kbs]}" backward-kill-dir
+zle -N custom-backward-kill-word
+
+custom-backward-word () {
+    local WORDCHARS="${WORDCHARS}/"
+    zle backward-word
+}
+zle -N custom-backward-word
+
+custom-forward-word () {
+    local WORDCHARS="${WORDCHARS}/"
+    zle forward-word
+}
+zle -N custom-forward-word
+
+#Ctrl+w => surpprime jusqu'au prochain espace
+bindkey '^W' custom-backward-kill-word
+
+#Alt+Backspace => surpprime jusqu'au prochain espace ou slash
+bindkey "^[${terminfo[kbs]}" backward-kill-word
 
 #Gestion tab au milieu d'une ligne (grace à _prefix)
 zstyle ':completion:*' completer _complete _prefix:-complete _prefix:-approximate
@@ -54,9 +56,13 @@ bindkey "^[u" kill-whole-line
 
 case $TERM in
     putty-256color)
-        #Ctrl+fléches gauche/droite => mot précèdent/suivant
+        #Ctrl+fléches gauche/droite => espace ou slash précèdent/suivant
         bindkey '^[OD' backward-word
         bindkey '^[OC' forward-word
+
+        #Shift+fléches gauche/droite => espace précèdent/suivant
+        #bindkey '^[OD' custom-backward-word
+        #bindkey '^[OC' custom-forward-word
 
         #Ctrl+fléches haut/bas => recherche dans l'historique ce qui commence par ce qui est entré
         bindkey '^[OA' history-search-backward
@@ -64,9 +70,13 @@ case $TERM in
    ;;
 
     xterm-256color | screen-256color | tmux-256color)
-        #Ctrl+fléches gauche/droite => mot précèdent/suivant
+        #Ctrl+fléches gauche/droite => espace ou slash précèdent/suivant
         bindkey '^[[1;5D' backward-word
         bindkey '^[[1;5C' forward-word
+
+        #Shift+fléches gauche/droite => espace précèdent/suivant
+        bindkey '^[[1;2D' custom-backward-word
+        bindkey '^[[1;2C' custom-forward-word
 
         #Ctrl+fléches haut/bas => recherche dans l'historique ce qui commence par ce qui est entré
         bindkey '^[[1;5A' history-search-backward
