@@ -68,7 +68,8 @@ plugins=([...] zsh-syntax-highlighting zsh-autosuggestions)
 # https://github.com/zsh-users/zsh-autosuggestions => $ZSH_CUSTOM/plugins
 # https://github.com/zsh-users/zsh-syntax-highlighting => $ZSH_CUSTOM/plugins
 
-#GigiX
+# GigiX
+local ret_status="%(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ %s)"
 PROMPT='%{$fg[green]%}%n%{$fg[white]%}@%{$fg[magenta]%}%m%{$fg[white]%}:%{$fg[cyan]%}%~%{$reset_color%} ${ret_status}$(git_prompt_info)%{$reset_color%}'
 ```
 Move plugins [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting) and [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions) in **_$ZSH_CUSTOM/plugins_**.
